@@ -6,14 +6,10 @@ makeList.addEventListener("change", () => {
     getModels(make);
 });
 
-function getModels() {
-    //  https://vpic.nhtsa.dot.gov/api/Home/Index/LanguageExamples
-    // get the list of models for the selected make
-    fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/${make}?format=json`)
-        .then((response) => response.json())
-        .then((data) => {
-            appendModels(data.Results);
-        });
+async function getModels() {
+    const response = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/${make}?format=json`);
+    const data = await response.json();
+    appendModels(data.Results);
 }
 
 function appendModels(models) {
